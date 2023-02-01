@@ -1,0 +1,56 @@
+http://192.168.122.20/phppgadmin/
+
+SQLSERVER --> Instancia WINDOWSSQLDEV
+MONGO COMPASS --> Instancia WINDOWSSQLDEV
+
+
+
+SQLSERVER:                             MONGO:
+phppgadmin (postgres):                  192.168.122.168
+192.168.122.20
+
+export ORACLE_HOME=/opt/oracle/product/19c/dbhome_1
+export ORACLE_SID=ORCLCDB
+export ORACLE_BASE=/opt/oracle
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
+export PATH=$ORACLE_HOME/bin:$PATH
+
+export ORACLE_UNQNAME=GN
+export ORACLE_SID=GN
+
+alter session set "_ORACLE_SCRIPT"=true;
+Esto sirve para poder hacer cosas desde system, como crear usuarios y otorgarles roles
+create user RAUL identified by RAUL;
+grant create session, create table to RAUL;
+grant connect to RAUL;
+grant unlimited tablespace to RAUL;
+
+
+Desde el usuario ORACLE:
+nid target=sys/sys@ORCLCDB dbname=GN setname=YES
+
+orapwd file=$ORACLE_HOME/dbs/orapwGN password=XXX entries=10
+orapwd file=$ORACLE_HOME/dbs/orapwGN password=escarlata2000! entries=10
+
+
+
+
+                {% for i in resultado2 -%}
+                    {{ i[0] }}
+                {% endfor -%}
+
+create table asignaturas (
+nombre varchar (5),
+DNI varchar (15)
+);
+
+CREATE PUBLIC DATABASE LINK CONEXIONRAUL2
+CONNECT TO "antonio2"
+IDENTIFIED BY "antonio2"
+USING 'PSQLU';
+
+insert into asignaturas values ('ASO','28888888');
+insert into asignaturas values ('ABD','27777777');
+
+insert into profesores values ('28888888','Raúl Ruiz');
+insert into profesores values ('27777777','Rafael Luengo');

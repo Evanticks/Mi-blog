@@ -1,0 +1,57 @@
+apt policy systemd
+
+
+apt install sysvinit-utils
+apt install sysvinit-core
+
+cp /usr/share/sysv/inittab /etc
+nano /etc/inittab (id:3)
+
+Ahora vamos a hacer que la instancia no se autoinicie automáticamente
+nano /etc/default/grub.d/15_timeout.cfg (cambiar a 10)
+sudo update-grub
+reiniciamos y al final del grub linux ponemos init=/sbin/init
+
+
+
+PERSISTENTE
+GRUB_CMDLINE_LINUX_DEFAULT= y añadir al final la ruta de arriba.
+apt purge systemd
+
+
+
+
+
+
+grep -r "comando a buscar"
+
+
+
+
+comandos systemd (systemctl)
+sudo systemctl --full edit ssh.service
+
+
+
+para crear un servicio:
+ls -l /etc/systemd/system
+sudo systemctl cat vdb.mount
+sudo nano /etc/systemd/system/miservicio.service
+
+```shell
+[Unit]
+Descripcion=Mi primer servicio
+
+
+[Service]
+Type=simple
+Restart=always
+User=debian
+Group=debian
+ExecStart=/home/debian/miservicio.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
+sudo systemctl start miservicio.service

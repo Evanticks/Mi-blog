@@ -1,5 +1,6 @@
 ---
 title: Instalación automatizada basada en medio de almacenamiento extraíble.
+categories: Sistemas Operativos
 ---
 
 He comenzado descargando el archivo iso para poder abrirlo y colocar el preseed en él, el comando que he utilizado es xorriso.

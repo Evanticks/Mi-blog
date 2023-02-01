@@ -1,0 +1,131 @@
+sudo systemctl start openvpn.service
+cd Programas/virtualenv/openstack
+source bin/activate
+source ~/Descargas/Proyecto\ de\ antonio.marchan-openrc.sh
+
+
+----------------------------------------------------
+
+## Crear volumenes
+openstack volume create --image "Debian 11 Bullseye" --size 30 alfa-volumen
+openstack volume create --image "Rocky Linux 9" --size 30 bravo-volumen
+
+openstack floating ip list
+openstack server add floating ip alfa 172.22.201.194
+
+## Crear subnet
+openstack subnet create --network DMZ_antonio --subnet-range 172.16.0.0/16 --dhcp  --dns-nameserver 192.168.202.2 --gateway 172.16.0.1 mi_subred
+
+
+## Crear máquina
+openstack server create --flavor vol.medium \
+    --volume alfa-volumen \
+    --security-group default \
+    --network "red de antonio.marchan" \
+    --user-data alfa-config.yaml \
+    alfa
+openstack floating ip create ext-net
+openstack server add floating ip alfa 172.22.200.150
+
+
+
+
+
+## Creamos el port y se la asignamos a alfa
+openstack port create --network DMZ_antonio --fixed-ip ip-address=172.16.0.1 puerto_DMZ_alfa
+openstack server add port alfa puerto_DMZ_alfa
+
+
+## Si lo queremos por DHCP (NO en nuestro caso)
+openstack server add network alfa DMZ_antonio
+openstack server remove network alfa DMZ_antonio
+
+
+
+
+
+openstack port list
+openstack server remove security group alfa default
+openstack port set --disable-port-security (id del port)
+
+
+
+
+openstack server create --flavor vol.normal \
+   --volume bravo-volumen \
+    --security-group default \
+    --port puerto_DMZ_bravo \
+    --user-data bravo-config.yaml \
+    bravo
+
+openstack port set --disable-port-security c6369c29-b543-4274-8fc1-7a45fd5608bc
+
+## borrar instancia
+openstack server delete prueba
+
+
+## Salto de una máquina a otra
+ssh -AJ antonio@172.22.201.194 antonio@172.16.0.123
+
+## Quitar red a una máquina
+openstack server remove network alfa DMZ_antonio
+
+
+## Contenedores
+/var/lib/lxc/contenedor1/config
+
+
+lxc-create -n delta -t ubuntu -- -r focal
+
+
+
+nano /etc/netplan/10-lxc.yaml
+
+network:
+  ethernets:
+   eth0:
+    dhcp4: no
+    addresses:
+    - 192.168.0.3/24
+    gateway4: 192.168.0.1
+
+netplan try
+netplan apply
+
+
+nano /etc/lxc/default.conf
+
+lxc.net.0.link = br-intra
+
+/var/lib/lxc/charlie/config
+
+lxc.net.0.link = br-intra
+lxc.net.0.mtu = 1450
+lxc.start.auto = 1
+
+
+
+
+nano /etc/hosts
+charlie.antonio.gonzalonazareno.org charlie
+
+adduser antonio
+adduser profesor
+
+nano /etc/sudoers
+antonio ALL=(ALL) NOPASSWD:ALL
+profesor ALL=(ALL) NOPASSWD:ALL
+
+nano .ssh/authorized_keys (copiamos dentro claves públicas)
+chown -R profesor:profesor .ssh
+
+nano .ssh/authorized_keys (copiamos dentro claves públicas)
+chown -R antonio:antonio .ssh
+
+passwd root
+
+
+ssh -AJ antonio@172.22.200.198 antonio@192.168.0.2
+ssh -AJ antonio@172.22.200.198 antonio@192.168.0.3
+ssh -AJ antonio@172.22.200.198 antonio@192.168.0.2
+ssh -AJ antonio@172.22.200.198 antonio@172.16.0.200

@@ -1,0 +1,11 @@
+**init.ora** -- uso de memoria, paths...
+**tnsnames.ora** -- config cliente,todas las bd a las que se conecta.
+**listener.ora** -- configura proceso de esccucha.
+
+Lo demás importante está en el diccionario de datos
+
+Base de datos:
+usuario y contraseña el cual el usuario entrará y tendrá unos permisos para ver unas tablas
+
+Grupal:
+usar cliente y configurarlo a través de TNS

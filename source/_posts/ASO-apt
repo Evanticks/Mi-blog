@@ -1,0 +1,28 @@
+mantenemos un paquetes para que no se actualice con `apt-mark`
+
+`apt-mark` showauto para ver los que están marcados para que no se actualicen.
+
+`apt-mark showmanual` para ver los que no se actualizan instalados de forma manual.
+
+`apt-mark showauto` para ver los que no se actualizan instalados de forma automática.
+
+
+`dpkg -s` para ver si un paquete está instalado.
+
+bullseye-proposed-updates -> para ver las propuestas de actualización.
+
+`dpkg -l xorriso` para ver el contenido de un determinado paquete
+
+
+`dpkg --get-selections` para ver la lista de paquetes instalados. A raíz de esto se puede hacer un script que instale la lista de programas en otra máquina.
+
+`/var/cache/apt/archives` se hayan los deb de los programas instalados. Para esto podemos usar apt clean.
+
+`dpkg --configure -a`
+
+
+
+
+
+
+

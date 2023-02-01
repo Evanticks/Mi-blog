@@ -1,0 +1,32 @@
+
+vamos a la página www.kernel.org
+uname -r
+apt policy linux-image-amd64
+nano /etc/apt/surces.list y metemos main-backports
+
+volvemos a ver linux-image-amd64
+efibootmgr
+sudo apt install linux-image-amd64
+
+salta la shell EFI
+FS0:
+ls
+EFI
+debian
+ls
+grubx64.efi
+
+Nos metemos en UEFI FIRMWARE
+Dentro podemos especificar el arranque
+foot from file:
+EFI
+debian
+grubx64.efi
+
+Si nos metemos en opciones avanzadas vemos los kernel y entramos en el más nuevo
+uname -r
+sudo rm -r /boot/vmlinuz.5.19-amd64
+sudo update grub para que desaparezca de las entradas
+
+
+sudo apt install --simulate build-essential flex nbison openssl libssl-dev dkms libncurses-dev ncurses-dev qtbase5-dev libelf-dev

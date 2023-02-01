@@ -1,0 +1,19 @@
+Hay que trabajar como root
+lxc-create -n contenedor1 -t debian -- -r bullseye
+Empezará a descargar el sistema de archivos de debian
+
+para borrarlo:
+lxc-destroy contenedor1
+
+'LXC trabaja con guiones, si encuentras lxc destroy significa que es parte de LXD'
+lxc-ls
+
+lxc-start contenedor1
+
+lxc-attach contendor1 (solo funciona desde el host)
+(podemos conectarnos a través de ssh)
+
+
+
+Si queremos configurar todos los contenedores para que sean diferentes a la configuración inicial:
+cd /etc/lxc/default.conf

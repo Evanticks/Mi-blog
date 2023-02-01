@@ -1,0 +1,25 @@
+---
+title: Docker
+categories: Implantación de Aplicaciones
+---
+
+
+docker run -d --name servidor_mysql \
+                --network rednextcloud \
+                -v /home/antonio/nextcloud-mariadb:/var/lib/mysql \
+                -e MYSQL_DATABASE=nextcloud \
+                -e MYSQL_USER=nextcloud \
+                -e MYSQL_PASSWORD=antonio \
+                -e MYSQL_ROOT_PASSWORD=hola \
+                mariadb
+
+
+docker run -d --name nexcloud \
+                --network rednextcloud \
+                -v /home/antonio/nextcloud:/var/www/html \
+                -e MYSQL_DATABASE=nextcloud \
+                -e MYSQL_USER=nextcloud \
+                -e MYSQL_PASSWORD=antonio \
+                -e MYSQL_HOST=servidor_mysql \
+                -p 8080:80 \
+                nextcloud
