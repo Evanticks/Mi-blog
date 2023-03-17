@@ -9,7 +9,7 @@ categories: Bases de Datos
 
 Comenzaremos adjuntando el script de creación de tablas e inserciones de Oracle:
 
-```sql
+```
 CREATE TABLE DEPT
 (
  DEPTNO NUMBER(2),
@@ -55,7 +55,7 @@ COMMIT;
 
 
 ### 1. Hacer un procedimiento que muestre el nombre y el salario del empleado cuyo código es 7082
-```sql
+```
 create or replace procedure mostrar_7082
 IS
     v_nombre emp.ename%type;
@@ -72,7 +72,7 @@ END;
 ![remoto](/images/oracle-ejercicio1.png)
 
 ### 2. Hacer un procedimiento que reciba como parámetro un código de empleado y devuelva su nombre
-```sql
+```
 Create or replace procedure codigoanombreemp (p_codempleado emp.empno%type)
 IS
     v_nombre emp.ename%type;
@@ -86,7 +86,7 @@ END;
 ![remoto](/images/oracle-ejercicio2.png)
 
 ### 3. Hacer un procedimiento que devuelva los nombres de los tres empleados más antiguos
-```sql
+```
 create or replace procedure tresempleadosmasantiguos
 IS
 cursor c_empleados is
@@ -102,7 +102,7 @@ END;
 ![remoto](/images/oracle-ejercicio5.png)
 
 ### 4. Hacer un procedimiento que reciba el nombre de un tablespace y muestre los nombres de los usuarios que lo tienen como tablespace por defecto (Vista DBA_USERS)
-```sql
+```
 create or replace procedure tablespacedefecto (p_tablespace DBA_USERS.DEFAULT_TABLESPACE%type)
 IS
 cursor c_tablespace is
@@ -118,7 +118,7 @@ END;
 ![remoto](/images/oracle-ejercicio3.png)
 
 ### 5. Modificar el procedimiento anterior para que haga lo mismo pero devolviendo el número de usuarios que tienen ese tablespace como tablespace por defecto. Nota: Hay que convertir el procedimiento en función
-```sql
+```
 create or replace function tablespacedefecto (p_tablespace DBA_USERS.DEFAULT_TABLESPACE%type)
 return number
 IS
@@ -145,7 +145,7 @@ end;
 
 En  este ejercicio en concreto utilizaremos una función creada en el anterior ejercicio para este propósito.
 
-```sql
+```
 create or replace procedure mostrar_usuarios_por_tablespace
 is
 cursor c_tablespace is
@@ -175,7 +175,7 @@ end;
 ![remoto](/images/oracle-ejercicio6.png)
 
 ### 7. Hacer un procedimiento llamado mostrar_codigo_fuente  que reciba el nombre de otro procedimiento y muestre su código fuente. (DBA_SOURCE)
-```sql
+```
 create or replace procedure mostrar_codigo_fuente (p_procedimiento varchar2)
 IS
 cursor c_fuente is
@@ -192,7 +192,7 @@ end;
 
 ### 8. Hacer un procedimiento llamado mostrar_privilegios_usuario que reciba el nombre de un usuario y muestre sus privilegios de sistema y sus privilegios sobre objetos. (DBA_SYS_PRIVS y DBA_TAB_PRIVS)
 
-```sql
+```
 CREATE OR REPLACE PROCEDURE mostrar_privilegios_usuario (p_usuario DBA_USERS.USERNAME%TYPE)
 is
 cursor c_sistema is
@@ -213,7 +213,7 @@ END;
 ![remoto](/images/oracle-ejercicio8.png)
 
 ### 9. Realiza un procedimiento llamado listar_comisiones que nos muestre por pantalla un listado de las comisiones de los empleados agrupados según la localidad donde está ubicado su departamento con el siguiente formato:
-```sql
+```
 CREATE OR REPLACE PROCEDURE Listar_comisiones
 IS
 cursor c_localidad is
@@ -256,7 +256,7 @@ Podemos ver en la imagen que se produce un raise ya que hay un usuario con más 
 ![remoto](/images/oracle-ejercicio9.png)
 
 ### 10. Realiza un procedimiento que reciba el nombre de una tabla y muestre los nombres de las restricciones que tiene, a qué columna afectan y en qué consisten exactamente. (DBA_TABLES, DBA_CONSTRAINTS, DBA_CONS_COLUMNS)
-```sql
+```
 SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION_VC FROM DBA_CONSTRAINTS WHERE TABLE_NAME='EQUIPAR';
 SELECT CONSTRAINT_NAME,COLUMN_NAME FROM DBA_CONS_COLUMNS WHERE TABLE_NAME = 'PERSONAJE';
 
@@ -300,7 +300,7 @@ END;
 
 Comenzaremos adjuntando el script de creación de tablas e inserciones de Postgres:
 
-```sql
+```
 create table dept(
   deptno   decimal(2,0) not null,
   dname    varchar(14),
@@ -359,7 +359,7 @@ commit;
 
 
 ### 1. Hacer un procedimiento que muestre el nombre y el salario del empleado cuyo código es 7082
-```sql
+```
 CREATE or replace PROCEDURE mostrar_7082() 
 AS $$
 DECLARE
